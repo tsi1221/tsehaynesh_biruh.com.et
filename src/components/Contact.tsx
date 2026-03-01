@@ -71,7 +71,7 @@ ${formData.message}
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-7xl font-black text-white mb-4 tracking-tighter italic uppercase">
-            Let's <span className="text-[#FF8C00]">Connect.</span>
+            Let's <span className="text-[#FF8C00]">Talk.</span>
           </h2>
           <div className="h-1.5 w-24 bg-[#FF8C00] mx-auto rounded-full shadow-[0_0_15px_#FF8C00]" />
         </motion.div>
