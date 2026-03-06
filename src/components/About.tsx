@@ -1,8 +1,10 @@
-import { motion } from 'framer-motion';
-import { User, Briefcase, Code, Star, Github, Linkedin, Mail, Send, Instagram, Download, Send as SendIcon } from 'lucide-react';
-import profilePic from '../assets/profile.jpg'; 
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { User, Briefcase, Code, Star, Github, Linkedin, Mail, Send, Instagram, Download, CheckCircle2, Loader2 } from 'lucide-react';
+import profilePic from '../assets/profile.jpg';
 
 const About = () => {
+  const [cvStatus, setCvStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
   const contacts = [
     { icon: Github, link: "https://github.com/tsi1221" },
@@ -12,7 +14,6 @@ const About = () => {
     { icon: Instagram, link: "https://www.instagram.com/tsehayneshbiruh/" },
   ];
 
-  // Smooth scroll to contact
   const scrollToContact = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     const contactSection = document.querySelector("#contact");
@@ -20,6 +21,24 @@ const About = () => {
       contactSection.scrollIntoView({ behavior: "smooth" });
     }
   }
+
+  const handleDownloadCV = () => {
+    setCvStatus('loading');
+
+    setTimeout(() => {
+      const fileUrl = '/Tsi_CV.pdf';
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.download = 'Tsehaynesh_Biruh_CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setCvStatus('success');
+
+      setTimeout(() => setCvStatus('idle'), 3000);
+    }, 1200);
+  };
 
   return (
     <section id="about" className="py-36 px-6 bg-white dark:bg-[#080808] relative overflow-hidden">
@@ -123,22 +142,75 @@ const About = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-6 mt-6">
-              <a 
-                href="/Tsi_CV.pdf" 
-                download 
-                className="flex items-center gap-2 px-6 py-3 bg-orange-500 text-white rounded-xl font-semibold shadow-lg hover:bg-orange-600 transition-all"
+              
+              {/* Animated CV Download Button */}
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleDownloadCV}
+                disabled={cvStatus !== 'idle'}
+                className={`
+                  relative min-w-55 h-14 flex items-center justify-center gap-3 px-8 
+                  rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 overflow-hidden group
+                  border-2 
+                  ${cvStatus === 'success' 
+                    ? 'border-green-500/30 bg-green-500/5' 
+                    : 'border-white/10 hover:border-[#FF8C00] bg-white/2'}
+                `}
               >
-                <Download size={18}/> Download CV
-              </a>
+                <AnimatePresence mode="wait">
+                  {cvStatus === 'idle' && (
+                    <motion.div
+                      key="idle"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="flex items-center gap-3 text-white group-hover:text-[#FF8C00] transition-colors"
+                    >
+                      <span>Download CV</span>
+                      <Download size={18} className="group-hover:translate-y-0.5 transition-transform" />
+                    </motion.div>
+                  )}
 
+                  {cvStatus === 'loading' && (
+                    <motion.div
+                      key="loading"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="flex items-center gap-3 text-[#FF8C00]"
+                    >
+                      <span className="animate-pulse">Preparing</span>
+                      <Loader2 size={18} className="animate-spin" />
+                    </motion.div>
+                  )}
+
+                  {cvStatus === 'success' && (
+                    <motion.div
+                      key="success"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="flex items-center gap-2 text-green-400"
+                    >
+                      <span>Received</span>
+                      <CheckCircle2 size={18} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-linear-to-r from-transparent via-white/5 to-transparent group-hover:animate-shine" />
+              </motion.button>
+
+              {/* Hire Me */}
               <button
                 onClick={scrollToContact}
                 className="flex items-center gap-2 px-6 py-3 border border-orange-500 text-orange-500 rounded-xl font-semibold shadow-lg hover:bg-orange-500 hover:text-white transition-all"
               >
-                <SendIcon size={18}/> Hire Me
+                <Send size={18}/> Hire Me
               </button>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>

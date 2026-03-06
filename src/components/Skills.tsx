@@ -13,6 +13,8 @@ const SKILL_CATEGORIES = [
       { name: "Tailwind CSS", level: 98 },
       { name: "Framer Motion", level: 85 },
       { name: "Figma UI/UX", level: 90 },
+
+      { name: "Shadcn UI Components", level: 80 },
       { name: "Web Accessibility", level: 80 },
       { name: "Material UI", level: 88 },
       { name: "HTML5&CSS3", level: 82 },
@@ -25,9 +27,15 @@ const SKILL_CATEGORIES = [
     skills: [
       { name: "NestJS", level: 88 },
       { name: "Node.js / Express", level: 92 },
+       { name: "REST full API", level: 90 },  
       { name: "MongoDB / PostgreSQL", level: 88 },
+
       { name: "Prisma ORM", level: 85 },
+      
+
+      { name: "Swagger / OpenAPI", level: 85 },
       { name: "Supabase", level: 55 },
+
       { name: "Blockchain (Solidity)", level: 25 }
     ]
   },
@@ -65,7 +73,7 @@ const Skills: React.FC = () => {
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter -mt-8 italic text-[#0F3952] dark:text-white uppercase">
               Technical <span className="text-orange-500">Stack.</span>
             </h2>
-            <div className="w-24 h-2 bg-orange-500 mx-auto -mt-4 rounded-full shadow-[0_0_15px_rgba(249,115,22,0.4)]" />
+            <div className="w-24 mt-2 h-2 bg-orange-500 mx-auto  rounded-full shadow-[0_0_15px_rgba(249,115,22,0.4)]" />
             <p className="text-gray-500 dark:text-gray-400 mt-6 text-lg max-w-xl font-light leading-relaxed">
               A comprehensive breakdown of my technical proficiency and the architecture I use to build scalable digital experiences.
             </p>
