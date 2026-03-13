@@ -8,6 +8,10 @@ import proj2 from "../assets/images/landingpageforBlood.png";
 import proj3 from "../assets/images/image.png";
 import proj4 from "../assets/images/lawcare wonkeru.png";
 import proj5 from "../assets/images/portifolio.png";
+import proj6 from "../assets/TsahaLabs.png";
+import proj7 from "../assets/Tsehalab.png";
+import proj8 from "../assets/womenempowerment.png";
+import proj9 from "../assets/womensempowercampanywebsite.png";
 
 interface Project {
   title: string;
@@ -21,7 +25,7 @@ interface Project {
 const PROJECT_DATA: Project[] = [
   {
     title: "Fitihaber Ethiopia – LegalTech Platform",
-    desc: "Microservices-based LawTech ecosystem with secure document exchange, real-time communication, and multilingual support",
+    desc: "Microservices-based LawTech ecosystem with secure document exchange, real-time communication, and multilingual support.",
     tech: ["React", "Node.js", "PostgreSQL", "Socket.IO", "Docker", "Kubernetes"],
     img: [proj4],
     github: "https://github.com/tsi1221",
@@ -35,20 +39,36 @@ const PROJECT_DATA: Project[] = [
   },
   {
     title: "Blood Bank Management System",
-    desc: "The Blood Bank Management System is a web-based application designed to streamline the process of blood donation and distribution. Developed using React, this system serves as a vital tool for hospitals, blood banks, and donors, facilitating efficient management of blood resources.",
-    tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
-    img: [proj2, proj3], // two images
+    desc: "A web-based platform designed to streamline blood donation and distribution. It enables hospitals, blood banks, and donors to manage blood availability, requests, and donations efficiently.",
+    tech: ["React", "Node.js", "Express", "MongoDB"],
+    img: [proj2, proj3],
     github: "https://github.com/tsi1221",
   },
   {
     title: "Interactive Developer Portfolio",
-    desc: "Performance-optimized portfolio featuring smooth animations, modular architecture, and responsive design.",
+    desc: "Performance-optimized developer portfolio with modular architecture, modern UI animations, and responsive design for showcasing projects and achievements.",
     tech: ["React", "Vite", "Tailwind", "Framer Motion"],
     img: [proj5],
     github: "https://github.com/tsi1221",
   },
-];
 
+  {
+    title: "TsehaLabs – Innovation & Technology Platform",
+    desc: "A modern tech platform focused on innovation, research, and software development initiatives. Designed with a clean UI to showcase projects, ideas, and technology solutions.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+    img: [proj7, proj6],
+    github: "https://github.com/tsi1221",
+  },
+
+  {
+    title: "Women Empowerment Digital Platforms",
+    desc: "Two web platforms focused on empowering women through career growth, mentorship, and digital opportunities. Includes community support, learning resources, and career development tools.",
+    tech: ["React", "Vite", "Modern UI Design"],
+    img: [proj8, proj9],
+    github: "https://github.com/tsi1221",
+    demo: "https://femgenius.lovable.app/",
+  },
+];
 // Animation Variants
 const containerVariants: Variants = {
   hidden: {},
