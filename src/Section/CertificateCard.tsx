@@ -16,12 +16,11 @@ const CertificateCard: React.FC<CertificateProps> = ({ img, title, category }) =
     >
       {/* Image Layer */}
       <div className="absolute inset-0">
-        <img 
-          src={img} 
-          alt="Certificate" 
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+        <img
+          src={img}
+          alt="Certificate"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        {/* Cinematic Gradient Overlay */}
         <div className="absolute inset-0 bg-linear-to-t from-[#0F3952] via-[#0F3952]/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
       </div>
 

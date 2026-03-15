@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import CertificateCard from "./CertificateCard";
 
@@ -24,8 +24,8 @@ import c17 from "../assets/HCIP-BIG DATA developerV2.0 cours.png";
 import heroImg from "../assets/ethiopianblockchain blockchain.png";
 
 const Certificates: React.FC = () => {
-
   const headerRef = useRef<HTMLDivElement | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   const handleScroll = (id: string) => {
     const element = document.getElementById(id);
@@ -34,33 +34,27 @@ const Certificates: React.FC = () => {
     }
   };
 
-  // certificate list
   const certificates = [
     { img: c1, title: "Africa Blockchain", category: "Blockchain" },
     { img: c2, title: "Competitions Award", category: "Excellence" },
-
     { img: c16, title: "HCIA Storage V5.0 Course", category: "Storage" },
     { img: c3, title: "DevOps Fundamentals", category: "Infrastructure" },
     { img: c4, title: "HAH Blockchain", category: "Web3" },
     { img: c5, title: "Networking Essentials", category: "IT" },
     { img: c6, title: "Women's Hackathon", category: "Achievement" },
     { img: c7, title: "React Course - Husica", category: "Frontend" },
-
     { img: c15, title: "HCIA Security V4.0 Course", category: "Cybersecurity" },
     { img: c8, title: "Advanced Project III", category: "Development" },
     { img: c9, title: "Architecture Design IV", category: "Design" },
     { img: c10, title: "System Analysis V", category: "Engineering" },
-
-
     { img: c14, title: "HCCDA Cloud Native Course", category: "Cloud Native" },
     { img: c11, title: "Fullstack Project VI", category: "Software" },
     { img: c12, title: "Deployment Project VII", category: "Cloud" },
-
     { img: c13, title: "Gebeya Talent Program", category: "Professional" },
     { img: c17, title: "HCIP Big Data Developer V2.0 Course", category: "Big Data" },
   ];
 
-  // duplicate array for infinite animation
+  // Duplicate for infinite scroll
   const LOOPED = [...certificates, ...certificates];
 
   const { scrollYProgress } = useScroll({
@@ -72,22 +66,18 @@ const Certificates: React.FC = () => {
 
   return (
     <div id="certificates" className="bg-[#0A0A0A] min-h-screen scroll-mt-20 overflow-hidden">
-
       {/* HERO SECTION */}
       <header
         ref={headerRef}
         className="relative w-full h-[50vh] md:h-[65vh] flex items-center justify-center overflow-hidden bg-[#050505]"
       >
         <motion.div style={{ y: backgroundY }} className="absolute inset-0 w-full h-full">
-
           <img
             src={heroImg}
             alt="Hero Background"
             className="w-full h-full object-cover opacity-40 scale-105"
           />
-
           <div className="absolute inset-0 bg-linear-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
-
         </motion.div>
 
         <div className="relative z-10 text-center px-4">
@@ -95,86 +85,64 @@ const Certificates: React.FC = () => {
             Certifi
             <span className="text-[#FF8C00]">cations</span>
           </h1>
-
           <p className="text-gray-400 mt-4 uppercase tracking-widest">
             Verified Excellence • Technical Mastery
           </p>
         </div>
-
       </header>
 
-
       {/* CERTIFICATE CAROUSEL */}
-
       <section className="py-24 overflow-hidden border-y border-white/5">
-
         <div className="max-w-7xl mx-auto px-6 mb-20 flex justify-between items-end">
-
           <div>
             <h2 className="text-4xl font-black text-white uppercase">
-              Professional <span className="text-[#FF8C00]">Growth</span>  <br />
-            i taken <span className="text-[#FF8C00]"> 18</span>  certeficate
+              Professional <span className="text-[#FF8C00]">Growth</span> <br />
+              I have taken <span className="text-[#FF8C00]">18</span> certificates
             </h2>
-
             <p className="text-gray-500 mt-3">
               Continuous learning is the core of engineering.
             </p>
           </div>
-
         </div>
 
-
-        <div className="relative flex items-center">
-
+        <div className="relative flex items-center overflow-hidden">
           <motion.div
             className="flex gap-12 px-5"
-            animate={{ x: ["0%", "-50%"] }}
+            animate={{ x: isPaused ? "0%" : ["0%", "-50%"] }}
             transition={{
               duration: 40,
               ease: "linear",
               repeat: Infinity,
             }}
           >
-
             {LOOPED.map((cert, index) => (
-
               <div
                 key={`${cert.title}-${index}`}
                 className="scale-90 hover:scale-100 transition-transform"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
               >
-
                 <CertificateCard
                   img={cert.img}
                   title={cert.title}
                   category={cert.category}
                 />
-
               </div>
-
             ))}
-
           </motion.div>
-
         </div>
-
       </section>
 
-
       {/* CTA SECTION */}
-
       <section className="py-32 px-6 bg-[#080808] text-center">
-
         <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
           Ready to build <span className="text-[#FF8C00]">Impact?</span>
         </h2>
-
         <p className="text-gray-400 mb-10 max-w-xl mx-auto">
-          Certifications are the foundation, but solving complex problems
-          is where I thrive.
+          Certifications are the foundation, but solving complex problems is where I thrive.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
-
           <button
             onClick={() => handleScroll("contact")}
             className="bg-[#FF8C00] text-black px-10 py-4 rounded-full font-bold hover:scale-105 transition"
@@ -188,11 +156,8 @@ const Certificates: React.FC = () => {
           >
             View Projects
           </button>
-
         </div>
-
       </section>
-
     </div>
   );
 };
