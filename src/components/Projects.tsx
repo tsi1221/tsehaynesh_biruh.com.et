@@ -66,7 +66,7 @@ const PROJECT_DATA: Project[] = [
     tech: ["React", "Vite", "Modern UI Design"],
     img: [proj8, proj9],
     github: "https://github.com/tsi1221",
-    demo: "https://femgenius.lovable.app/",
+    // demo: "https://femgenius.lovable.app/",
   },
 ];
 // Animation Variants
