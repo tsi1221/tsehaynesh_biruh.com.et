@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import CertificateCard from "./CertificateCard";
 
-// Assets
+// Asset imports (Ensure these paths match your project structure)
+import c18 from "../assets/ethiopianblockchain blockchain.png"; 
 import c1 from "../assets/afriblockchain.png";
 import c2 from "../assets/comptions.png";
 import c3 from "../assets/fundamentalsDevops.png";
@@ -21,143 +22,160 @@ import c15 from "../assets/HCIA-SECURITY V4.0 course.png";
 import c16 from "../assets/HCIA-Storage v5.0 COURSE.png";
 import c17 from "../assets/HCIP-BIG DATA developerV2.0 cours.png";
 
-import heroImg from "../assets/ethiopianblockchain blockchain.png";
+export interface CertData {
+  img: string;
+  title: string;
+  category: string;
+  description: string;
+}
 
 const Certificates: React.FC = () => {
-  const headerRef = useRef<HTMLDivElement | null>(null);
+  const [selectedCert, setSelectedCert] = useState<CertData | null>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const certificates: CertData[] = [
+    { 
+      img: c18, 
+      title: "EBW Outstanding Volunteer", 
+      category: "Web3 Infrastructure", 
+      description: "Official Verified Achievement: Recognized for excellence in managing technical networking and exhibition booths during Ethiopia Blockchain Week 2025, facilitating a seamless experience for over 1,000 global attendees." 
+    },
+    { 
+      img: c1, 
+      title: "Africa Blockchain Champion", 
+      category: "Web3 Elite", 
+      description: "Official Verified Achievement: Mastery of decentralized ledgers and smart contract ecosystems as a recognized continental champion." 
+    },
+    { 
+      img: c11, 
+      title: "UI/UX Student of the Week", 
+      category: "Nigerian Online Learning", 
+      description: "Official Verified Achievement: Awarded for top-tier UI/UX design performance and fullstack engineering in an elite Nigerian development program." 
+    },
+    { 
+      img: c2, 
+      title: "C Women's Competition", 
+      category: "Competition Award", 
+      description: "Awarded by the Cooperative Bank of Ethiopia for outstanding technical problem solving and innovation in the Women's Hackathon." 
+    },
+    { 
+      img: c10, 
+      title: "AI Specialist - 5M Coders", 
+      category: "Artificial Intelligence", 
+      description: "Official Verified Achievement: Certified under the 5 Million Coders initiative, specializing in enterprise-scale system analysis and AI-driven performance." 
+    },
+    { 
+      img: c4, 
+      title: "Hashgraph Blockchain Expert", 
+      category: "Hedera Hashgraph", 
+      description: "Official Verified Achievement: Expertise in Hashgraph implementations, consensus algorithms, and high-security private ledgers." 
+    },
+    { img: c16, title: "HCIA Storage V5.0", category: "Infrastructure", description: "Official Verified Achievement: Expertise in converged storage and enterprise data protection." },
+    { img: c15, title: "HCIA Security V4.0", category: "Cybersecurity", description: "Official Verified Achievement: Mastery of network security protocols and threat mitigation." },
+    { img: c14, title: "HCCDA Cloud Native", category: "Cloud", description: "Official Verified Achievement: Specialization in containerization and cloud-native architecture." },
+    { img: c17, title: "HCIP Big Data Dev", category: "Data Science", description: "Official Verified Achievement: Professional-level big data processing and Hadoop ecosystems." },
+    { img: c3, title: "DevOps Fundamentals", category: "Development", description: "Official Verified Achievement: Implementation of CI/CD pipelines and infrastructure as code." },
+    { img: c5, title: "Networking Essentials", category: "Networking", description: "Official Verified Achievement: Foundation in routing, switching, and digital communications." },
+    { img: c7, title: "React Development", category: "Frontend", description: "Official Verified Achievement: Modern UI engineering using React hooks and global state management." },
+    { img: c13, title: "Gebeya Talent", category: "Professional", description: "Official Verified Achievement: Verified elite technical talent for professional software engineering." },
+    { img: c6, title: "Womens Hackathon", category: "Achievement", description: "Official Verified Achievement: Excellence in collaborative innovation and competitive coding." },
+    { img: c8, title: "Advanced Project III", category: "Engineering", description: "Official Verified Achievement: High-scale system integration and complex logic design." },
+    { img: c9, title: "Gebeya Talent Recognition for 6 week", category: "Elite Talent", description: "Official Verified Achievement: Recognized for co-creating an outstanding capstone project in the Safaricom Talent Cloud—ProLogix: Product and Logistics Management System—following an intensive 6-week elite developer program." },
+    { img: c12, title: "Deployment Project VII", category: "Cloud", description: "Official Verified Achievement: Automated deployment strategies for global applications." },
+    // { img: c17, title: "Cloud Security V2.0", category: "Cybersecurity", description: "Official Verified Achievement: Advanced cloud security auditing and risk management." }
+  ];
+
+  const duplicatedCerts = [...certificates, ...certificates];
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 450;
+      scrollContainerRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
     }
   };
 
-  const certificates = [
-    { img: c1, title: "Africa Blockchain", category: "Blockchain" },
-    { img: c2, title: "Competitions Award", category: "Excellence" },
-    { img: c16, title: "HCIA Storage V5.0 Course", category: "Storage" },
-    { img: c3, title: "DevOps Fundamentals", category: "Infrastructure" },
-    { img: c4, title: "HAH Blockchain", category: "Web3" },
-    { img: c5, title: "Networking Essentials", category: "IT" },
-    { img: c6, title: "Women's Hackathon", category: "Achievement" },
-    { img: c7, title: "React Course - Husica", category: "Frontend" },
-    { img: c15, title: "HCIA Security V4.0 Course", category: "Cybersecurity" },
-    { img: c8, title: "Advanced Project III", category: "Development" },
-    { img: c9, title: "Architecture Design IV", category: "Design" },
-    { img: c10, title: "System Analysis V", category: "Engineering" },
-    { img: c14, title: "HCCDA Cloud Native Course", category: "Cloud Native" },
-    { img: c11, title: "Fullstack Project VI", category: "Software" },
-    { img: c12, title: "Deployment Project VII", category: "Cloud" },
-    { img: c13, title: "Gebeya Talent Program", category: "Professional" },
-    { img: c17, title: "HCIP Big Data Developer V2.0 Course", category: "Big Data" },
-  ];
-
-  // Duplicate for infinite scroll
-  const LOOPED = [...certificates, ...certificates];
-
-  const { scrollYProgress } = useScroll({
-    target: headerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-
   return (
-    <div id="certificates" className="bg-[#0A0A0A] min-h-screen scroll-mt-20 overflow-hidden">
-      {/* HERO SECTION */}
-      <header
-        ref={headerRef}
-        className="relative w-full h-[50vh] md:h-[65vh] flex items-center justify-center overflow-hidden bg-[#050505]"
-      >
-        <motion.div style={{ y: backgroundY }} className="absolute inset-0 w-full h-full">
-          <img
-            src={heroImg}
-            alt="Hero Background"
-            className="w-full h-full object-cover opacity-40 scale-105"
-          />
-          <div className="absolute inset-0 bg-linear-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
+    <div id="certificates" className="bg-[#0A0A0A] min-h-screen py-32 overflow-hidden relative">
+      {/* Header */}
+      <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row md:items-end justify-between">
+        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }}>
+          <h2 className="text-6xl md:text-9xl font-black text-white uppercase italic leading-none">
+            Certifi<span className="text-orange-500">cations</span>
+          </h2>
+          <p className="text-zinc-500 mt-8 uppercase tracking-widest text-sm font-bold">
+            Verified Excellence • <span className="text-orange-500">19 Professional Achievements</span>
+          </p>
         </motion.div>
 
-        <div className="relative z-10 text-center px-4">
-          <h1 className="text-5xl md:text-9xl font-black text-white uppercase italic">
-            Certifi
-            <span className="text-[#FF8C00]">cations</span>
-          </h1>
-          <p className="text-gray-400 mt-4 uppercase tracking-widest">
-            Verified Excellence • Technical Mastery
-          </p>
+        {/* Navigation */}
+        <div className="flex gap-4 mt-8 md:mt-0">
+          <button 
+            onClick={() => scroll("left")}
+            className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-orange-500 hover:text-black transition-all active:scale-90"
+          >
+            ←
+          </button>
+          <button 
+            onClick={() => scroll("right")}
+            className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-orange-500 hover:text-black transition-all active:scale-90"
+          >
+            →
+          </button>
         </div>
-      </header>
+      </div>
 
-      {/* CERTIFICATE CAROUSEL */}
-      <section className="py-24 overflow-hidden border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6 mb-20 flex justify-between items-end">
-          <div>
-            <h2 className="text-4xl font-black text-white uppercase">
-              Professional <span className="text-[#FF8C00]">Growth</span> <br />
-              I have taken <span className="text-[#FF8C00]">18</span> certificates
-            </h2>
-            <p className="text-gray-500 mt-3">
-              Continuous learning is the core of engineering.
-            </p>
-          </div>
-        </div>
+      {/* Slider */}
+      <div 
+        className="relative flex overflow-x-auto no-scrollbar"
+        ref={scrollContainerRef}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        <motion.div
+          className="flex gap-8 px-6 md:px-[5%]"
+          animate={isPaused ? {} : { x: ["0%", "-50%"] }}
+          transition={{ x: { repeat: Infinity, duration: 65, ease: "linear" } }}
+        >
+          {duplicatedCerts.map((cert, index) => (
+            <CertificateCard key={index} {...cert} onClick={() => setSelectedCert(cert)} />
+          ))}
+        </motion.div>
+      </div>
 
-        <div className="relative flex items-center overflow-hidden">
+      {/* Modal View */}
+      <AnimatePresence>
+        {selectedCert && (
           <motion.div
-            className="flex gap-12 px-5"
-            animate={{ x: isPaused ? "0%" : ["0%", "-50%"] }}
-            transition={{
-              duration: 40,
-              ease: "linear",
-              repeat: Infinity,
-            }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl"
+            onClick={() => setSelectedCert(null)}
           >
-            {LOOPED.map((cert, index) => (
-              <div
-                key={`${cert.title}-${index}`}
-                className="scale-90 hover:scale-100 transition-transform"
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
-              >
-                <CertificateCard
-                  img={cert.img}
-                  title={cert.title}
-                  category={cert.category}
-                />
+            <motion.div
+              initial={{ scale: 0.8 }} animate={{ scale: 1 }}
+              className="relative max-w-5xl w-full bg-zinc-950 rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button onClick={() => setSelectedCert(null)} className="absolute top-8 right-8 z-30 bg-orange-500 text-black p-4 rounded-full font-bold">✕</button>
+              <div className="flex flex-col lg:flex-row">
+                <div className="lg:w-3/5 bg-black flex items-center justify-center p-10">
+                  <img src={selectedCert.img} className="max-h-[60vh] object-contain" alt="Certificate" />
+                </div>
+                <div className="lg:w-2/5 p-12 flex flex-col justify-center bg-zinc-900/50">
+                  <span className="text-orange-500 font-black tracking-widest text-xs uppercase mb-4 block">Official Verified Achievement</span>
+                  <h2 className="text-4xl font-black text-white mb-6 uppercase italic leading-tight">{selectedCert.title}</h2>
+                  <p className="text-zinc-400 text-lg leading-relaxed mb-10">{selectedCert.description}</p>
+                  <button onClick={() => setSelectedCert(null)} className="w-full py-5 bg-white text-black font-black rounded-2xl hover:bg-orange-500 transition-all uppercase italic">Back to Gallery</button>
+                </div>
               </div>
-            ))}
+            </motion.div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* CTA SECTION */}
-      <section className="py-32 px-6 bg-[#080808] text-center">
-        <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
-          Ready to build <span className="text-[#FF8C00]">Impact?</span>
-        </h2>
-        <p className="text-gray-400 mb-10 max-w-xl mx-auto">
-          Certifications are the foundation, but solving complex problems is where I thrive.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-6 justify-center">
-          <button
-            onClick={() => handleScroll("contact")}
-            className="bg-[#FF8C00] text-black px-10 py-4 rounded-full font-bold hover:scale-105 transition"
-          >
-            Get In Touch
-          </button>
-
-          <button
-            onClick={() => handleScroll("projects")}
-            className="border border-white/20 text-white px-10 py-4 rounded-full hover:bg-white/10"
-          >
-            View Projects
-          </button>
-        </div>
-      </section>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
