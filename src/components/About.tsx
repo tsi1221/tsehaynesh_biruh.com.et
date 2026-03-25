@@ -106,7 +106,7 @@ const About = () => {
               </motion.div>
 
               <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                I’m <span className="font-semibold">Tsi</span>, a software engineer from Ethiopia. I write clean, maintainable code and design with purpose to solve real problems, reduce effort, and speed up delivery. Using full-stack development and DevOps practices, I build scalable systems that help businesses digitize efficiently.
+                I’m <span className="font-semibold">Tsehaynesh(Tsi)</span>, a software engineer from Ethiopia. I write clean, maintainable code and design with purpose to solve real problems, reduce effort, and speed up delivery. Using full-stack development and DevOps practices, I build scalable systems that help businesses digitize efficiently.
               </p>
             </div>
 

@@ -15,8 +15,8 @@ const CVButton = () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const link = document.createElement("a");
-    link.href = "/Tsehaynesh_Biruh_CV.pdf";
-    link.download = "Tsehaynesh_Biruh_CV.pdf";
+    link.href = "/Tsehaynesh_Biruh_Resumee.pdf";
+    link.download = "Tsehaynesh_Biruh_Resumee.pdf";
 
     document.body.appendChild(link);
     link.click();
