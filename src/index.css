@@ -1,4 +1,31 @@
 @import "tailwindcss";
+
+/* Force fully black background everywhere */
+html, body, #root {
+  background-color: #080808 !important;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Override any white backgrounds */
+.bg-white,
+.bg-white\/90,
+.bg-white\/80,
+.bg-white\/50,
+[class*="bg-white"] {
+  background-color: #080808 !important;
+}
+
+/* Override any gradient backgrounds with white */
+[class*="from-white"],
+[class*="via-white"],
+[class*="to-white"],
+[class*="to-orange-50"] {
+  background-image: none !important;
+  background-color: #080808 !important;
+}
+
 /* Custom noise overlay */
 .noise-bg::before {
   content: "";
@@ -12,4 +39,35 @@
   z-index: 9999;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Ensure all sections have black background */
+section,
+main,
+div[class*="bg-"] {
+  background-color: #080808;
+}
+
+/* Override any light mode specific backgrounds */
+@media (prefers-color-scheme: light) {
+  html, body, #root {
+    background-color: #080808 !important;
+  }
+}
+
+/* Override dark mode specific backgrounds - force black */
+@media (prefers-color-scheme: dark) {
+  html, body, #root {
+    background-color: #080808 !important;
+  }
+}
+
+/* Ensure text remains visible on black background */
+body {
+  color: #ffffff;
+}
+
+/* Smooth transitions when switching */
+* {
+  transition: background-color 0.3s ease;
 }
