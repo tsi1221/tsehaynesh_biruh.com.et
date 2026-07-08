@@ -8,7 +8,10 @@ import proj1 from "../assets/images/dashboradof.png";
 import proj2 from "../assets/images/landingpageforBlood.png";
 import proj3 from "../assets/images/image.png";
 import proj4 from "../assets/images/lawcare wonkeru.png";
-import proj5 from "../assets/images/portifolio.png";
+import final1 from "../assets/final1.png";
+import final2 from "../assets/final2.png";
+import final3 from "../assets/final3.png";
+import final4 from "../assets/final4.png";
 import proj6 from "../assets/TsahaLabs.png";
 import proj7 from "../assets/Tsehalab.png";
 import proj8 from "../assets/womenempowerment.png";
@@ -21,6 +24,10 @@ interface Project {
   img: string[];
   github: string;
   demo?: string;
+}
+
+interface ProjectsProps {
+  isDarkMode?: boolean;
 }
 
 const PROJECT_DATA: Project[] = [
@@ -46,11 +53,12 @@ const PROJECT_DATA: Project[] = [
     github: "https://github.com/tsi1221",
   },
   {
-    title: "Interactive Portfolio",
-    desc: "Performance-optimized developer portfolio with modern UI animations and responsive design.",
-    tech: ["React", "Vite", "Tailwind", "Framer Motion"],
-    img: [proj5],
+    title: "EduTwin – AI-Powered Education Platform",
+    desc: "Built the complete frontend architecture for an AI-powered educational platform featuring interactive learning, AR experiences, and a modern responsive interface designed for engaging digital education.",
+    tech: ["React", "Vite", "Tailwind", "Framer Motion", "Frontend"],
+    img: [final1, final2, final3, final4],
     github: "https://github.com/tsi1221",
+    demo: "https://edutwin-website.onrender.com",
   },
   {
     title: "TsehaLabs – Tech Platform",
@@ -81,7 +89,7 @@ const fadeUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const Projects = () => {
+const Projects: React.FC<ProjectsProps> = ({ isDarkMode = true }) => {
   const [loading, setLoading] = useState(true);
   const controls = useAnimation();
   const ref = useRef<HTMLDivElement>(null);
@@ -100,9 +108,22 @@ const Projects = () => {
   }, [isInView, controls, loading]);
 
   return (
-    <section id="projects" ref={ref} className="pt-12 md:pt-16 pb-20 md:pb-32 bg-white dark:bg-[#080808] relative overflow-hidden">
+    <section 
+      id="projects" 
+      ref={ref} 
+      className={`pt-12 md:pt-16 pb-20 md:pb-32 relative overflow-hidden transition-colors duration-500 ${
+        isDarkMode 
+          ? "bg-[#080808]" 
+          : "bg-gradient-to-b from-white via-orange-50/20 to-white"
+      }`}
+    >
+      {/* Background Ambient Glow */}
+      <div className={`absolute top-20 left-1/4 w-[500px] h-[500px] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${
+        isDarkMode ? "bg-orange-500/3" : "bg-orange-200/30"
+      }`} />
+      
       {/* Container tracking max width with balanced fluid side-margins */}
-      <div className="container mx-auto max-w-7xl border-x border-slate-200 dark:border-white/10 px-4 sm:px-8 md:px-16 lg:px-24">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-8 md:px-16 lg:px-24 relative z-10">
         
         {/* Header Block Section */}
         <motion.div
@@ -116,7 +137,9 @@ const Projects = () => {
               <LayoutGrid size={13} />
               Portfolio
             </div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-[0.95]">
+            <h2 className={`text-4xl md:text-6xl font-black tracking-tight leading-[0.95] transition-colors duration-500 ${
+              isDarkMode ? "text-white" : "text-slate-900"
+            }`}>
               SELECTED <br />
               <span className="text-orange-500">PROJECTS</span>
             </h2>
@@ -124,7 +147,9 @@ const Projects = () => {
 
           <motion.div
             variants={fadeUp}
-            className="text-slate-500 dark:text-slate-400 max-w-xs font-medium border-l-2 border-orange-500 pl-4 text-xs md:text-sm leading-relaxed"
+            className={`max-w-xs font-medium border-l-2 border-orange-500 pl-4 text-xs md:text-sm leading-relaxed transition-colors duration-500 ${
+              isDarkMode ? "text-slate-400" : "text-slate-600"
+            }`}
           >
             Engineering scalable, secure, and human-centered systems through
             modern architecture and refined interaction design.
@@ -133,7 +158,7 @@ const Projects = () => {
 
         {/* Adaptive Grid Layout */}
         {loading ? (
-          <SkeletonGrid />
+          <SkeletonGrid isDarkMode={isDarkMode} />
         ) : (
           <motion.div
             variants={containerVariants}
@@ -142,7 +167,7 @@ const Projects = () => {
             className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10"
           >
             {PROJECT_DATA.map((project, index) => (
-              <ProjectCard key={index} {...project} />
+              <ProjectCard key={index} {...project} isDarkMode={isDarkMode} />
             ))}
           </motion.div>
         )}
@@ -158,7 +183,11 @@ const Projects = () => {
             href="https://github.com/tsi1221"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 px-6 py-3.5 md:px-8 md:py-4 bg-slate-100 dark:bg-white/5 rounded-full font-bold text-[11px] uppercase tracking-widest hover:bg-orange-500 hover:text-white transition-all duration-300"
+            className={`inline-flex items-center gap-3 px-6 py-3.5 md:px-8 md:py-4 rounded-full font-bold text-[11px] uppercase tracking-widest hover:bg-orange-500 hover:text-white transition-all duration-300 ${
+              isDarkMode 
+                ? "bg-white/5 text-white" 
+                : "bg-slate-100 text-slate-800 hover:shadow-lg"
+            }`}
           >
             <Github size={16} />
             Explore Full Repository
@@ -169,10 +198,15 @@ const Projects = () => {
   );
 };
 
-const SkeletonGrid = () => (
+const SkeletonGrid: React.FC<{ isDarkMode?: boolean }> = ({ isDarkMode = true }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
     {[1, 2, 3, 4].map((i) => (
-      <div key={i} className="animate-pulse bg-slate-200 dark:bg-white/10 h-72 rounded-2xl" />
+      <div 
+        key={i} 
+        className={`animate-pulse h-72 rounded-2xl transition-colors duration-500 ${
+          isDarkMode ? "bg-white/10" : "bg-slate-200"
+        }`} 
+      />
     ))}
   </div>
 );

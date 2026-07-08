@@ -31,7 +31,11 @@ export interface CertData {
   description: string;
 }
 
-const Certificates: React.FC = () => {
+interface CertificatesProps {
+  isDarkMode?: boolean;
+}
+
+const Certificates: React.FC<CertificatesProps> = ({ isDarkMode = true }) => {
   const [selectedCert, setSelectedCert] = useState<CertData | null>(null);
   const [isPaused, setIsPaused] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -112,14 +116,28 @@ const Certificates: React.FC = () => {
   };
 
   return (
-    <div id="certificates" className="bg-[#0A0A0A] min-h-screen py-20 overflow-hidden relative">
+    <div 
+      id="certificates" 
+      className={`min-h-screen py-20 overflow-hidden relative transition-colors duration-500 ${
+        isDarkMode ? "bg-[#0A0A0A]" : "bg-gradient-to-b from-white via-white to-slate-50"
+      }`}
+    >
+      {/* Background Ambient Glow */}
+      <div className={`absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${
+        isDarkMode ? "bg-orange-500/3" : "bg-orange-100/40"
+      }`} />
+
       {/* Header */}
       <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 mb-10 flex flex-col md:flex-row md:items-end justify-between">
         <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}>
-          <h2 className="text-4xl md:text-5xl font-bold text-white uppercase tracking-tight">
+          <h2 className={`text-4xl md:text-5xl font-bold uppercase tracking-tight transition-colors duration-500 ${
+            isDarkMode ? "text-white" : "text-slate-900"
+          }`}>
             Certifi<span className="text-orange-500">cations</span>
           </h2>
-          <p className="text-zinc-500 mt-2 text-xs tracking-wider font-medium">
+          <p className={`mt-2 text-xs tracking-wider font-medium transition-colors duration-500 ${
+            isDarkMode ? "text-zinc-500" : "text-slate-500"
+          }`}>
             Verified Excellence
           </p>
         </motion.div>
@@ -128,13 +146,21 @@ const Certificates: React.FC = () => {
         <div className="flex gap-3 mt-6 md:mt-0">
           <button 
             onClick={() => scroll("left")}
-            className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white text-sm hover:bg-orange-500 hover:text-black transition-all active:scale-90"
+            className={`w-10 h-10 rounded-full border flex items-center justify-center text-sm hover:bg-orange-500 hover:text-black transition-all active:scale-90 ${
+              isDarkMode 
+                ? "border-white/10 text-white" 
+                : "border-slate-300 text-slate-700 hover:border-orange-500"
+            }`}
           >
             ←
           </button>
           <button 
             onClick={() => scroll("right")}
-            className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white text-sm hover:bg-orange-500 hover:text-black transition-all active:scale-90"
+            className={`w-10 h-10 rounded-full border flex items-center justify-center text-sm hover:bg-orange-500 hover:text-black transition-all active:scale-90 ${
+              isDarkMode 
+                ? "border-white/10 text-white" 
+                : "border-slate-300 text-slate-700 hover:border-orange-500"
+            }`}
           >
             →
           </button>
@@ -170,7 +196,11 @@ const Certificates: React.FC = () => {
           >
             <motion.div
               initial={{ scale: 0.9 }} animate={{ scale: 1 }}
-              className="relative max-w-4xl w-full bg-zinc-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl mx-4"
+              className={`relative max-w-4xl w-full rounded-2xl overflow-hidden border shadow-2xl mx-4 ${
+                isDarkMode 
+                  ? "bg-zinc-900 border-white/10" 
+                  : "bg-white border-slate-200"
+              }`}
               onClick={(e) => e.stopPropagation()}
             >
               <button 
@@ -180,26 +210,38 @@ const Certificates: React.FC = () => {
                 ✕
               </button>
               <div className="flex flex-col lg:flex-row">
-                <div className="lg:w-1/2 bg-zinc-800 flex items-center justify-center p-8">
+                <div className={`lg:w-1/2 flex items-center justify-center p-8 ${
+                  isDarkMode ? "bg-zinc-800" : "bg-slate-50"
+                }`}>
                   <img 
                     src={selectedCert.img} 
                     className="max-h-[45vh] max-w-[85%] object-contain" 
                     alt={selectedCert.title} 
                   />
                 </div>
-                <div className="lg:w-1/2 p-8 flex flex-col justify-center bg-zinc-900/80">
+                <div className={`lg:w-1/2 p-8 flex flex-col justify-center ${
+                  isDarkMode ? "bg-zinc-900/80" : "bg-white"
+                }`}>
                   <span className="text-orange-500 font-semibold text-[11px] uppercase tracking-wider mb-3 block">
                     Official Verified Achievement
                   </span>
-                  <h2 className="text-3xl font-bold text-white mb-4 leading-tight">
+                  <h2 className={`text-3xl font-bold mb-4 leading-tight transition-colors duration-500 ${
+                    isDarkMode ? "text-white" : "text-slate-900"
+                  }`}>
                     {selectedCert.title}
                   </h2>
-                  <p className="text-zinc-400 text-base leading-relaxed mb-8">
+                  <p className={`text-base leading-relaxed mb-8 transition-colors duration-500 ${
+                    isDarkMode ? "text-zinc-400" : "text-slate-600"
+                  }`}>
                     {selectedCert.description}
                   </p>
                   <button 
                     onClick={() => setSelectedCert(null)} 
-                    className="w-full py-3 bg-white text-black text-sm font-semibold rounded-xl hover:bg-orange-500 transition-all"
+                    className={`w-full py-3 text-sm font-semibold rounded-xl transition-all ${
+                      isDarkMode 
+                        ? "bg-white text-black hover:bg-orange-500" 
+                        : "bg-slate-900 text-white hover:bg-orange-500"
+                    }`}
                   >
                     Back to Gallery
                   </button>

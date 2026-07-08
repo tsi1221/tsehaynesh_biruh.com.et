@@ -3,7 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { User, Briefcase, Code, Star, Github, Linkedin, Mail, Send, Instagram, Download, CheckCircle2, Loader2 } from 'lucide-react';
 import profilePic from '../assets/profile.jpg';
 
-const About = () => {
+interface AboutProps {
+  isDarkMode?: boolean;
+}
+
+const About: React.FC<AboutProps> = ({ isDarkMode = true }) => {
   const [cvStatus, setCvStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
   const contacts = [
@@ -41,9 +45,21 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="py-24 bg-white dark:bg-[#080808] relative overflow-hidden">
+    <section 
+      id="about" 
+      className={`py-24 relative overflow-hidden transition-colors duration-500 ${
+        isDarkMode ? "bg-[#080808]" : "bg-gradient-to-b from-white via-white to-orange-50/20"
+      }`}
+    >
+      {/* Background Ambient Glow */}
+      <div className={`absolute top-1/3 -right-32 w-[500px] h-[500px] rounded-full blur-[150px] pointer-events-none transition-colors duration-500 ${
+        isDarkMode ? "bg-orange-500/3" : "bg-orange-100/50"
+      }`} />
+      
       {/* max-w-6xl with enhanced px spacing perfectly anchors deep margins layout framing */}
-      <div className="container mx-auto max-w-7xl border-x border-slate-200 dark:border-white/10 px-8 md:px-20 lg:px-32">
+      <div className={`container mx-auto max-w-7xl px-8 md:px-20 lg:px-32 transition-colors duration-500 ${
+        isDarkMode ? "border-slate-200/5" : "border-slate-200"
+      }`}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
           {/* Image Column */}
@@ -54,10 +70,16 @@ const About = () => {
             viewport={{ once: true }}
             className="relative group w-full"
           >
-            <div className="absolute -inset-4 border border-orange-500/20 rounded-[3rem] translate-x-4 translate-y-4 -z-10" />
-            <div className="absolute -inset-4 border border-slate-200 dark:border-white/10 rounded-[3rem] -z-20" />
+            <div className={`absolute -inset-4 border rounded-[3rem] translate-x-4 translate-y-4 -z-10 transition-colors duration-500 ${
+              isDarkMode ? "border-orange-500/20" : "border-orange-300/50"
+            }`} />
+            <div className={`absolute -inset-4 border rounded-[3rem] -z-20 transition-colors duration-500 ${
+              isDarkMode ? "border-white/10" : "border-slate-300"
+            }`} />
             
-            <div className="relative aspect-4/5 overflow-hidden rounded-[2.5rem] bg-slate-100 dark:bg-white/5 shadow-2xl">
+            <div className={`relative aspect-4/5 overflow-hidden rounded-[2.5rem] shadow-2xl transition-colors duration-500 ${
+              isDarkMode ? "bg-white/5" : "bg-slate-50"
+            }`}>
               <img 
                 src={profilePic} 
                 alt="Tsehaynesh Biruh" 
@@ -74,7 +96,11 @@ const About = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15 }}
                     whileTap={{ scale: 0.95 }}
-                    className="p-3 rounded-xl bg-white/90 dark:bg-black/70 backdrop-blur border border-white/20 shadow-lg hover:bg-orange-500 hover:text-white transition-all text-slate-800 dark:text-white"
+                    className={`p-3 rounded-xl backdrop-blur border shadow-lg hover:bg-orange-500 hover:text-white transition-all ${
+                      isDarkMode 
+                        ? "bg-black/70 border-white/20 text-white" 
+                        : "bg-white/90 border-slate-200 text-slate-800"
+                    }`}
                   >
                     <Item.icon size={18}/>
                   </motion.a>
@@ -82,11 +108,17 @@ const About = () => {
               </div>
 
               {/* Current Status Badge Layer */}
-              <div className="absolute bottom-4 left-6 right-6 z-20 p-2 md:p-4 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl text-center">
-                <p className="text-white text-[10px] font-black uppercase tracking-[0.2em] mb-1">
+              <div className={`absolute bottom-4 left-6 right-6 z-20 p-2 md:p-4 backdrop-blur-xl border rounded-2xl text-center transition-colors duration-500 ${
+                isDarkMode 
+                  ? "bg-black/40 border-white/10" 
+                  : "bg-white/80 border-slate-200 shadow-lg"
+              }`}>
+                <p className={`text-[10px] font-black uppercase tracking-[0.2em] mb-1 transition-colors duration-500 ${
+                  isDarkMode ? "text-white" : "text-slate-900"
+                }`}>
                   Current Status
                 </p>
-                <p className="text-orange-400 text-xs font-bold flex items-center justify-center gap-2">
+                <p className="text-orange-500 text-xs font-bold flex items-center justify-center gap-2">
                   <Briefcase size={12}/> Software Engineer
                 </p>
               </div>
@@ -106,8 +138,10 @@ const About = () => {
                 <User size={14}/> <span className="text-xl md:text-2xl">About Me</span>
               </motion.div>
 
-              <p className="text-base md:text-md text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                I’m <span className="font-semibold">Tsehaynesh (Tsi)</span>, a software engineer from Ethiopia. I write clean, maintainable code and design with purpose to solve real problems, reduce effort, and speed up delivery. Using full-stack development and DevOps practices, I build scalable systems that help businesses digitize efficiently.
+              <p className={`text-base md:text-md leading-relaxed font-medium transition-colors duration-500 ${
+                isDarkMode ? "text-slate-300" : "text-slate-700"
+              }`}>
+                I'm <span className="font-semibold">Tsehaynesh (Tsi)</span>, a software engineer from Ethiopia. I write clean, maintainable code and design with purpose to solve real problems, reduce effort, and speed up delivery. Using full-stack development and DevOps practices, I build scalable systems that help businesses digitize efficiently.
               </p>
             </div>
 
@@ -121,7 +155,9 @@ const About = () => {
                 <Star size={14}/> <span className="text-xl md:text-2xl">My Journey</span>
               </motion.div>
 
-              <p className="text-base md:text-md text-slate-600 dark:text-slate-300 leading-relaxed font-medium italic">
+              <p className={`text-base md:text-md leading-relaxed font-medium italic transition-colors duration-500 ${
+                isDarkMode ? "text-slate-300" : "text-slate-700"
+              }`}>
                 Curiosity led me into coding. I focus on high-quality, user-focused projects with clean architecture and strong performance. I continuously learn and improve while creating systems that simplify complexity and deliver meaningful results.
               </p>
             </div>
@@ -136,7 +172,9 @@ const About = () => {
                 <Code size={14}/> <span className="text-xl md:text-2xl">Beyond Code</span>
               </motion.div>
 
-              <p className="text-base md:text-md text-slate-600 dark:text-slate-300 leading-relaxed font-medium italic">
+              <p className={`text-base md:text-md leading-relaxed font-medium italic transition-colors duration-500 ${
+                isDarkMode ? "text-slate-300" : "text-slate-700"
+              }`}>
                 I enjoy <span className="font-semibold">exploring nature</span>, exchanging ideas with creative thinkers, and fostering meaningful communication. Participating in hackathons and collaborative projects helps turn bold ideas into practical solutions.
               </p>
             </div>
@@ -156,7 +194,10 @@ const About = () => {
                   border-2 
                   ${cvStatus === 'success' 
                     ? 'border-green-500/30 bg-green-500/5 text-green-400' 
-                    : 'border-slate-200 dark:border-white/10 hover:border-[#FF8C00] dark:hover:border-[#FF8C00] bg-transparent text-slate-800 dark:text-white'}
+                    : isDarkMode
+                      ? 'border-white/10 hover:border-[#FF8C00] bg-transparent text-white'
+                      : 'border-slate-300 hover:border-[#FF8C00] bg-transparent text-slate-800 hover:bg-orange-50/50'
+                  }
                 `}
               >
                 <AnimatePresence mode="wait">
@@ -200,13 +241,13 @@ const About = () => {
                   )}
                 </AnimatePresence>
 
-                <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-linear-to-r from-transparent via-white/5 to-transparent group-hover:animate-shine" />
+                <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:animate-shine" />
               </motion.button>
 
               {/* Secondary Option Trigger: Contact Anchor link */}
               <button
                 onClick={scrollToContact}
-                className="flex items-center gap-2 px-5 h-12 border border-orange-500 text-orange-500 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md hover:bg-orange-500 hover:text-white transition-all"
+                className="flex items-center gap-2 px-5 h-12 border-2 border-orange-500 text-orange-500 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md hover:bg-orange-500 hover:text-white transition-all hover:shadow-lg hover:shadow-orange-500/20"
               >
                 <Send size={16}/> Hire Me
               </button>
