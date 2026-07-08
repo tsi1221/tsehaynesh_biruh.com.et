@@ -3,7 +3,7 @@ import { motion, useAnimation, useInView, type Variants } from "framer-motion";
 import { Github, LayoutGrid } from "lucide-react";
 import ProjectCard from "./ProjectCard";
 
-// Asset imports (keep these as you had them)
+// Asset imports
 import proj1 from "../assets/images/dashboradof.png";
 import proj2 from "../assets/images/landingpageforBlood.png";
 import proj3 from "../assets/images/image.png";
@@ -72,13 +72,13 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { 
     opacity: 1, 
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 } 
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 } 
   },
 };
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 const Projects = () => {
@@ -86,11 +86,10 @@ const Projects = () => {
   const controls = useAnimation();
   const ref = useRef<HTMLDivElement>(null);
   
-  // Use a smaller "amount" (0.1) so it triggers easier on small mobile screens
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800);
+    const timer = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(timer);
   }, []);
 
@@ -101,21 +100,23 @@ const Projects = () => {
   }, [isInView, controls, loading]);
 
   return (
-    <section id="projects" ref={ref} className="py-20 md:py-32 px-4 md:px-6 bg-white dark:bg-[#080808] relative overflow-hidden">
-      <div className="container mx-auto max-w-7xl">
-        {/* Header */}
+    <section id="projects" ref={ref} className="pt-12 md:pt-16 pb-20 md:pb-32 bg-white dark:bg-[#080808] relative overflow-hidden">
+      {/* Container tracking max width with balanced fluid side-margins */}
+      <div className="container mx-auto max-w-7xl border-x border-slate-200 dark:border-white/10 px-4 sm:px-8 md:px-16 lg:px-24">
+        
+        {/* Header Block Section */}
         <motion.div
           initial="hidden"
           animate={controls}
           variants={containerVariants}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-6"
+          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-5"
         >
-          <motion.div variants={fadeUp} className="space-y-4">
+          <motion.div variants={fadeUp} className="space-y-2">
             <div className="flex items-center gap-2 text-orange-500 font-bold text-xs uppercase tracking-[0.3em]">
-              <LayoutGrid size={14} />
+              <LayoutGrid size={13} />
               Portfolio
             </div>
-            <h2 className="text-5xl md:text-8xl font-black tracking-tight leading-[0.9]">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-[0.95]">
               SELECTED <br />
               <span className="text-orange-500">PROJECTS</span>
             </h2>
@@ -123,14 +124,14 @@ const Projects = () => {
 
           <motion.div
             variants={fadeUp}
-            className="text-slate-500 dark:text-slate-400 max-w-sm font-medium border-l-2 border-orange-500 pl-6 text-sm md:text-base"
+            className="text-slate-500 dark:text-slate-400 max-w-xs font-medium border-l-2 border-orange-500 pl-4 text-xs md:text-sm leading-relaxed"
           >
             Engineering scalable, secure, and human-centered systems through
             modern architecture and refined interaction design.
           </motion.div>
         </motion.div>
 
-        {/* Grid Logic */}
+        {/* Adaptive Grid Layout */}
         {loading ? (
           <SkeletonGrid />
         ) : (
@@ -138,7 +139,7 @@ const Projects = () => {
             variants={containerVariants}
             initial="hidden"
             animate={controls}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10"
           >
             {PROJECT_DATA.map((project, index) => (
               <ProjectCard key={index} {...project} />
@@ -146,20 +147,20 @@ const Projects = () => {
           </motion.div>
         )}
 
-        {/* Footer CTA */}
+        {/* Main Action Footer */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-20 md:mt-32 text-center"
+          className="mt-14 md:mt-20 text-center"
         >
           <a
             href="https://github.com/tsi1221"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-4 px-8 py-4 md:px-12 md:py-6 bg-slate-100 dark:bg-white/5 rounded-full font-bold text-xs md:text-sm uppercase tracking-widest hover:bg-orange-500 hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-3 px-6 py-3.5 md:px-8 md:py-4 bg-slate-100 dark:bg-white/5 rounded-full font-bold text-[11px] uppercase tracking-widest hover:bg-orange-500 hover:text-white transition-all duration-300"
           >
-            <Github size={18} />
+            <Github size={16} />
             Explore Full Repository
           </a>
         </motion.div>
@@ -169,9 +170,9 @@ const Projects = () => {
 };
 
 const SkeletonGrid = () => (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
     {[1, 2, 3, 4].map((i) => (
-      <div key={i} className="animate-pulse bg-slate-200 dark:bg-white/10 h-80 rounded-3xl" />
+      <div key={i} className="animate-pulse bg-slate-200 dark:bg-white/10 h-72 rounded-2xl" />
     ))}
   </div>
 );

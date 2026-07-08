@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 const roles = [
   "Software Engineer",
   "Full-Stack Developer",
-  "DevSecOps Enthusiast",
+  "Devops Engineer",
   "Problem Solver",
-  "Blockchain Developer"
+  // "Blockchain Developer"
 ];
 
 const TypingTitle = () => {

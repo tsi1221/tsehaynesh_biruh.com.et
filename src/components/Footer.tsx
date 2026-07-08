@@ -61,7 +61,7 @@ const Footer = () => {
       {/* Background Decorative Glow */}
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#FF8C00]/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-8 md:px-16 lg:px-24 xl:px-32 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-20">
           
           {/* Column 1: Identity */}
@@ -70,7 +70,7 @@ const Footer = () => {
               Tsehaynesh <span className="text-[#FF8C00]">Biruh</span>
             </h3>
             <p className="text-slate-500 dark:text-gray-400 max-w-sm font-medium leading-relaxed">
-              Software Engineering student focused on building high-performance 
+              Software Engineer focused on building high-performance 
               applications and intuitive user experiences.
             </p>
             <div className="flex items-center gap-3 text-sm font-bold text-slate-400">

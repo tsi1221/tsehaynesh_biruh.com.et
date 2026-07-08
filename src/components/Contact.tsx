@@ -59,7 +59,7 @@ ${formData.message}
   };
 
   return (
-    <section id="contact" className="py-32 px-6 bg-[#0A0A0A] relative overflow-hidden">
+    <section id="contact" className="py-32 -mt-24 px-6 bg-[#0A0A0A] relative overflow-hidden">
       {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-[#FF8C00]/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -70,7 +70,7 @@ ${formData.message}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-black text-white mb-4 tracking-tighter italic uppercase">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter italic uppercase">
             Let's <span className="text-[#FF8C00]">Talk.</span>
           </h2>
           <div className="h-1.5 w-24 bg-[#FF8C00] mx-auto rounded-full shadow-[0_0_15px_#FF8C00]" />

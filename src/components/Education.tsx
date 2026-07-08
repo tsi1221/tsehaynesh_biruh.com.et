@@ -12,14 +12,22 @@ interface JourneyItem {
 }
 
 const journeyData: JourneyItem[] = [
-  {
-    title: "B.S. in Software Engineering",
-    location: "Jimma University | Ethiopia",
-    date: "2021 – 2026",
-    role: "Team Lead & Full-Stack Architect",
-    description: "Comprehensive program focused on system architecture and database design. Led the 'Metina Hermata' Capstone project for CBTP , building a full-stack brokerage platform for real estate and automotive markets.",
-    tags: ["System Design", "Database Management", "API Design"]
-  },
+ {
+  title: "B.S. in Software Engineering",
+  location: "Jimma University | Ethiopia",
+  date: "2021 – 2026",
+  role: "Team Lead, Full-Stack Architect & Frontend Developer",
+  description:
+    "Completed a comprehensive Software Engineering program with a strong foundation in system architecture, database design, and software development. Led the 'Metina Hermata' CBTP capstone project, building a full-stack brokerage platform for real estate and automotive markets. For my final-year project, developed the frontend of EduTwin, an AI-powered educational platform, creating responsive and interactive user interfaces with modern web technologies.",
+  tags: [
+    "React",
+    "Frontend Development",
+    "Full-Stack Development",
+    "System Design",
+    "Database Management",
+    "API Design"
+  ]
+},
   {
     title: "INSA",
     location: "Full-Stack Developer Intern",
@@ -77,7 +85,7 @@ const Education: React.FC = () => {
           viewport={{ once: true }}
           className="mb-20 text-center md:text-left"
         >
-          <h2 className="text-4xl md:text-6xl font-black mb-4 tracking-tighter uppercase italic">
+          <h2 className="text-2xl md:text-4xl font-black mb-4 tracking-tighter uppercase italic">
             Academic <span className="text-[#FF8C00]">Journey</span>
           </h2>
           <div className="h-1.5 w-32 bg-[#FF8C00] mb-8 mx-auto md:mx-0 shadow-[0_0_15px_#FF8C00]"></div>
@@ -103,7 +111,7 @@ const Education: React.FC = () => {
 
               {/* Date Badge */}
               <div className="mb-2">
-                <span className="text-[10px] font-mono font-bold text-[#FF8C00] bg-[#FF8C00]/10 px-2 py-1 rounded border border-[#FF8C00]/30 tracking-widest uppercase">
+                <span className="text-[7px] font-mono font-bold text-[#FF8C00] bg-[#FF8C00]/10 px-2 py-1 rounded border border-[#FF8C00]/30 tracking-widest uppercase">
                   {item.date}
                 </span>
               </div>
