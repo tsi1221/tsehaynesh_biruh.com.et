@@ -26,7 +26,7 @@ import Contact from './components/Contact';
  * Premium, minimal loading state spinner.
  */
 const LoadingScreen = () => (
-  <div className="flex h-screen w-full items-center justify-center bg-white dark:bg-[#080808]">
+  <div className="flex h-screen w-full items-center justify-center bg-[#080808]">
     <motion.div
       animate={{ rotate: 360 }}
       transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
@@ -43,7 +43,7 @@ export default function App() {
 
   return (
     <Suspense fallback={<LoadingScreen />}>
-      <div className="relative min-h-screen bg-white text-slate-900 selection:bg-orange-500/30 dark:bg-[#080808] dark:text-white overflow-x-hidden transition-colors duration-500">
+      <div className="relative min-h-screen bg-[#080808] text-white selection:bg-orange-500/30 overflow-x-hidden transition-colors duration-500">
         
         {/* Ambient & Navigation Interaction Layers */}
         <CursorGlow />
@@ -54,7 +54,7 @@ export default function App() {
           {/* ================= HERO SECTION ================= */}
           <section
             id="home"
-            className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-b from-white via-white to-orange-50/40 px-4 xs:px-6 sm:px-12 md:px-20 lg:px-32 pt-24 pb-12 md:pt-32 md:pb-16 lg:py-0 dark:from-[#080808] dark:via-[#080808] dark:to-[#090909]"
+            className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#080808] px-4 xs:px-6 sm:px-12 md:px-20 lg:px-32 pt-24 pb-12 md:pt-32 md:pb-16 lg:py-0"
           >
             {/* Hidden on ultra-small mobile displays to clean up the workspace area */}
             <div className="hidden xs:block">
@@ -69,15 +69,15 @@ export default function App() {
                   initial={{ opacity: 0, scale: 0.94 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative h-44 w-44 xs:h-52 xs:w-52 sm:h-64 sm:w-64 lg:h-80 lg:w-80 p-[2px] rounded-full bg-gradient-to-b from-neutral-200 to-neutral-300/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-700 hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] dark:from-neutral-700/60 dark:to-neutral-900/10 dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] dark:hover:shadow-[0_12px_40px_rgb(0,0,0,0.4)]"
+                  className="group relative h-44 w-44 xs:h-52 xs:w-52 sm:h-64 sm:w-64 lg:h-80 lg:w-80 p-[2px] rounded-full bg-gradient-to-b from-neutral-700/60 to-neutral-900/10 shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-700 hover:shadow-[0_12px_40px_rgb(0,0,0,0.4)]"
                 >
                   {/* Modern Ambient Glow Backdrop */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-neutral-400/0 via-neutral-400/0 to-neutral-400/10 opacity-0 blur-xl transition-opacity duration-700 group-hover:opacity-100 dark:to-white/5" />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-neutral-400/0 via-neutral-400/0 to-white/5 opacity-0 blur-xl transition-opacity duration-700 group-hover:opacity-100" />
 
                   {/* Glassmorphism Outer Frame Ring */}
-                  <div className="relative flex h-full w-full items-center justify-center rounded-full bg-white/90 p-1 backdrop-blur-md dark:bg-neutral-950/90">
+                  <div className="relative flex h-full w-full items-center justify-center rounded-full bg-neutral-950/90 p-1 backdrop-blur-md">
                     {/* Inner Image Mask Container */}
-                    <div className="relative h-full w-full overflow-hidden rounded-full border border-neutral-100 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
+                    <div className="relative h-full w-full overflow-hidden rounded-full border border-neutral-800 bg-neutral-900">
                       <img
                         src="/image.png"
                         alt="Tsehaynesh Biruh"
@@ -96,7 +96,7 @@ export default function App() {
                   initial={{ opacity: 0, y: -15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="inline-flex items-center justify-center text-center rounded-full border border-emerald-500/20 bg-emerald-500/5 mt-10 sm:mt-14 lg:mt-20 px-3 sm:px-4 py-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-emerald-600 dark:text-emerald-400 shadow-sm backdrop-blur-sm select-none"
+                  className="inline-flex items-center justify-center text-center rounded-full border border-emerald-500/20 bg-emerald-500/5 mt-10 sm:mt-14 lg:mt-20 px-3 sm:px-4 py-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-emerald-400 shadow-sm backdrop-blur-sm select-none"
                 >
                   <span className="flex items-center gap-1.5">
                     {/* Micro green pulse dot to enhance the "Available" context visually */}
@@ -114,7 +114,7 @@ export default function App() {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
-                  className="mt-4 mb-2 text-2xl xs:text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight sm:leading-none text-slate-950 dark:text-white drop-shadow-sm"
+                  className="mt-4 mb-2 text-2xl xs:text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight sm:leading-none text-white drop-shadow-sm"
                 >
                   TSEHAYNESH <span className="text-orange-500">BIRUH</span>
                 </motion.h1>
@@ -129,14 +129,14 @@ export default function App() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.8 }}
-                  className="mt-4 mb-6 max-w-xl text-xs xs:text-sm sm:text-base font-medium leading-relaxed text-slate-500 dark:text-slate-400"
+                  className="mt-4 mb-6 max-w-xl text-xs xs:text-sm sm:text-base font-medium leading-relaxed text-slate-400"
                 >
                   I design and build modern{' '}
-                  <span className="font-semibold text-orange-500 dark:text-orange-400">web</span> and{' '}
-                  <span className="font-semibold text-orange-500 dark:text-orange-400">mobile applications</span> powered by scalable{' '}
-                  <span className="font-semibold text-orange-500 dark:text-orange-400">backend systems</span>,{' '}
-                  <span className="font-semibold text-orange-500 dark:text-orange-400">cloud technologies</span>, and{' '}
-                  <span className="font-semibold text-orange-500 dark:text-orange-400">DevOps</span>. I transform ideas into secure, high-performance digital products with clean architecture and intuitive user experiences.
+                  <span className="font-semibold text-orange-400">web</span> and{' '}
+                  <span className="font-semibold text-orange-400">mobile applications</span> powered by scalable{' '}
+                  <span className="font-semibold text-orange-400">backend systems</span>,{' '}
+                  <span className="font-semibold text-orange-400">cloud technologies</span>, and{' '}
+                  <span className="font-semibold text-orange-400">DevOps</span>. I transform ideas into secure, high-performance digital products with clean architecture and intuitive user experiences.
                 </motion.p>
 
                 {/* Primary CTA Buttons */}
@@ -190,7 +190,7 @@ export default function App() {
           </section>
 
           {/* ================= MAIN SCROLLABLE CONTENT ================= */}
-          <div className="relative z-10 bg-white dark:bg-[#080808]">
+          <div className="relative z-10 bg-[#080808]">
             <About />
             <Projects />
             <Skills />
