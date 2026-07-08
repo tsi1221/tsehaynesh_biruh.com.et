@@ -42,23 +42,23 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-black/80 backdrop-blur-xl py-4 border-b border-slate-200 shadow-lg"
-          : "bg-transparent py-8"
+          ? "bg-black/80 backdrop-blur-xl py-3 border-b border-slate-200 shadow-lg"
+          : "bg-transparent py-5"
       }`}
     >
-      <div className="container mx-auto px-6 flex justify-between items-center">
+      <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center">
         {/* Logo */}
         <motion.span
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-2xl font-black tracking-tighter cursor-pointer"
+          className="text-lg sm:text-xl md:text-2xl font-black tracking-tighter cursor-pointer"
           onClick={() => scrollToSection("home")}
         >
           TSEHAYNESH <span className="text-orange-500">BIRUH</span>
         </motion.span>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-10 font-bold text-sm uppercase tracking-widest">
+        <div className="hidden md:flex items-center gap-6 lg:gap-10 font-bold text-xs lg:text-sm uppercase tracking-wider lg:tracking-widest">
           {navLinks.map((link) => (
             <button
               key={link.name}
@@ -77,7 +77,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-orange-500"
           >
-            {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
@@ -101,12 +101,12 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 h-screen w-[75%] z-50 flex flex-col p-12 gap-8 shadow-2xl bg-white dark:bg-[#080808]"
+              className="fixed right-0 top-0 h-screen w-[75%] z-50 flex flex-col p-8 gap-6 shadow-2xl bg-white dark:bg-[#080808]"
             >
-              <div className="flex justify-between w-full mb-8">
-                <span className="font-black text-orange-500">MENU</span>
+              <div className="flex justify-between items-center w-full mb-6">
+                <span className="font-bold text-sm text-orange-500 uppercase tracking-wider">Menu</span>
                 <button onClick={() => setIsMenuOpen(false)}>
-                  <X size={32} />
+                  <X size={24} />
                 </button>
               </div>
 
@@ -117,14 +117,14 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.08 }}
-                  className="text-4xl font-black hover:text-orange-500 transition-colors tracking-tighter text-left"
+                  className="text-2xl font-bold hover:text-orange-500 transition-colors tracking-tight text-left"
                 >
                   {link.name}
                 </motion.button>
               ))}
 
-              <div className="mt-auto pt-8 border-t">
-                <p className="text-xs font-bold opacity-40 tracking-widest uppercase">
+              <div className="mt-auto pt-6 border-t">
+                <p className="text-[10px] font-medium opacity-40 tracking-wider uppercase">
                   Addis Ababa, Ethiopia
                 </p>
               </div>

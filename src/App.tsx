@@ -93,20 +93,20 @@ export default function App() {
                 
                 {/* Ultra-minimal Availability Status Badge */}
                <motion.div
-  initial={{ opacity: 0, y: -15 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, ease: "easeOut" }}
-  className="inline-flex items-center justify-center text-center rounded-full border border-emerald-500/20 bg-emerald-500/5 mt-10 sm:mt-14 lg:mt-20 px-3 sm:px-4 py-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-emerald-600 dark:text-emerald-400 shadow-sm backdrop-blur-sm select-none"
->
-  <span className="flex items-center gap-1.5">
-    {/* Micro green pulse dot to enhance the "Available" context visually */}
-    <span className="relative flex h-1.5 w-1.5">
-      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-    </span>
-    Available for New Opportunities
-  </span>
-</motion.div>
+                  initial={{ opacity: 0, y: -15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="inline-flex items-center justify-center text-center rounded-full border border-emerald-500/20 bg-emerald-500/5 mt-10 sm:mt-14 lg:mt-20 px-3 sm:px-4 py-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-emerald-600 dark:text-emerald-400 shadow-sm backdrop-blur-sm select-none"
+                >
+                  <span className="flex items-center gap-1.5">
+                    {/* Micro green pulse dot to enhance the "Available" context visually */}
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                    </span>
+                    Available for New Opportunities
+                  </span>
+                </motion.div>
 
 
                 {/* Main Identity Header */}
@@ -150,25 +150,25 @@ export default function App() {
                     <span className="absolute inset-0 h-full w-full -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-shine" />
                     <span className="relative z-10">View My Work</span>
 
-                  <svg
-        className="h-3.5 w-3.5 stroke-[3.5] transition-transform duration-300 group-hover:translate-x-1"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path 
-          strokeLinecap="round" 
-          strokeLinejoin="round" 
-          stroke="url(#arrow-gradient)"
-          d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" 
-        />
-        {/* Custom definitions to inject a smooth orange-to-amber color scale directly into the vector path */}
-        <defs>
-          <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ffedd5" /> {/* Light orange tint */}
-            <stop offset="100%" stopColor="#fef3c7" /> {/* Light amber tint */}
-          </linearGradient>
-        </defs>
-      </svg>
+                    <svg
+                      className="h-3.5 w-3.5 stroke-[3.5] transition-transform duration-300 group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        stroke="url(#arrow-gradient)"
+                        d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" 
+                      />
+                      {/* Custom definitions to inject a smooth orange-to-amber color scale directly into the vector path */}
+                      <defs>
+                        <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#ffedd5" /> {/* Light orange tint */}
+                          <stop offset="100%" stopColor="#fef3c7" /> {/* Light amber tint */}
+                        </linearGradient>
+                      </defs>
+                    </svg>
                   </motion.a>
 
                   <div className="w-full sm:w-auto">
