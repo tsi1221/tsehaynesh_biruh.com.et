@@ -1,50 +1,71 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
-interface SkillBarProps {
+// 1. Declare isDarkMode in the props interface
+export interface SkillBarProps {
   name: string;
   level: number;
+  isDarkMode?: boolean;
 }
 
-const SkillBar: React.FC<SkillBarProps> = ({ name, level }) => {
+// 2. Destructure isDarkMode in the component parameters
+const SkillBar: React.FC<SkillBarProps> = ({ name, level, isDarkMode = true }) => {
   return (
-    /* Main wrapper container */
-    <div className="mx-0 mb-4 group max-w-2xl w-full">
+    <div className="group my-2 w-full max-w-2xl">
       {/* Skill Info Header Row */}
-      <div className="flex justify-between items-end mb-1.5">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-[#0F3952] dark:text-gray-400 group-hover:text-orange-500 transition-colors duration-300">
+      <div className="mb-1 flex items-end justify-between">
+        <span
+          className={`text-[10px] font-bold uppercase tracking-wider transition-colors duration-300 ${
+            isDarkMode
+              ? "text-neutral-400 group-hover:text-white"
+              : "text-slate-600 group-hover:text-slate-900"
+          }`}
+        >
           {name}
         </span>
-        <motion.span 
+        <motion.span
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="text-[10px] font-black text-orange-500 tabular-nums"
+          className={`font-mono text-[10px] font-black tabular-nums transition-colors duration-300 ${
+            isDarkMode
+              ? "text-orange-500/80 group-hover:text-orange-500"
+              : "text-orange-600/80 group-hover:text-orange-600"
+          }`}
         >
           {level}%
         </motion.span>
       </div>
 
-      {/* Progress Track - Thickened height to h-2 for a bold visual presence */}
-      <div className="relative h-1.5 w-full bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden border border-gray-200/60 dark:border-white/5 shadow-xs">
-        
-        {/* Animated Orange Fill */}
+      {/* Progress Track */}
+      <div
+        className={`relative h-1.5 w-full overflow-hidden rounded-full border transition-colors duration-500 ${
+          isDarkMode
+            ? "border-white/5 bg-white/5"
+            : "border-slate-200/60 bg-slate-200"
+        }`}
+      >
+        {/* Animated Bar Fill */}
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
-          transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           viewport={{ once: true }}
-          className="absolute top-0 left-0 h-full bg-linear-to-r from-orange-600 via-orange-400 to-amber-300 rounded-full shadow-[0_0_12px_rgba(249,115,22,0.35)]"
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+          className="relative h-full rounded-full bg-gradient-to-r from-orange-600 via-orange-500 to-amber-400 shadow-[0_0_12px_rgba(249,115,22,0.35)]"
         >
           {/* Moving Shimmer Effect */}
-          <motion.div 
-            animate={{ x: ['-100%', '100%'] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 bg-linear-to-r from-transparent via-white/25 to-transparent w-full h-full"
+          <motion.div
+            animate={{ x: ["-100%", "100%"] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/25 to-transparent"
           />
         </motion.div>
 
-        {/* Hover Glow Layer */}
-        <div className="absolute inset-0 bg-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
+        {/* Hover Glow Accent Layer */}
+        <div className="pointer-events-none absolute inset-0 bg-orange-500/10 opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100" />
       </div>
     </div>
   );
