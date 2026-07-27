@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Palette, Server, Cloud } from "lucide-react";
+import { Palette, Server, Cloud, Code2 } from "lucide-react";
 import SkillBar from "./SkillBar";
 
 interface SkillsProps {
@@ -91,7 +91,8 @@ const Skills: React.FC<SkillsProps> = ({ isDarkMode = false }) => {
           className="mb-12 text-center"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-orange-400 mb-3 backdrop-blur-md">
-            <span>⚡ Stack Overview</span>
+            <Code2 size={14} className="text-orange-400" strokeWidth={2.5} />
+            <span>Stack Overview</span>
           </div>
           <h2 className="text-3xl font-black tracking-tight sm:text-4xl md:text-5xl">
             TECHNICAL{" "}

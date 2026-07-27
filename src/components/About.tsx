@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Briefcase, Code, Star, Github, Linkedin, Mail, Send, Instagram, Download, CheckCircle2, Loader2 } from 'lucide-react';
+import { User, Briefcase, Github, Linkedin, Mail, Send, Instagram, Download, CheckCircle2, Loader2, MapPin, Heart, Sparkles } from 'lucide-react';
 import profilePic from '../assets/profile.jpg';
 
 interface AboutProps {
   isDarkMode?: boolean;
 }
 
-const About: React.FC<AboutProps> = ({ isDarkMode = true }) => {
+const About: React.FC<AboutProps> = ({ isDarkMode = false }) => {
   const [cvStatus, setCvStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
   const contacts = [
@@ -116,6 +116,7 @@ const About: React.FC<AboutProps> = ({ isDarkMode = true }) => {
                 <p className={`text-[10px] font-black uppercase tracking-[0.2em] mb-1 transition-colors duration-500 ${
                   isDarkMode ? "text-white" : "text-slate-900"
                 }`}>
+                  <MapPin size={10} className="inline mr-1" />
                   Current Status
                 </p>
                 <p className="text-orange-500 text-xs font-bold flex items-center justify-center gap-2">
@@ -135,7 +136,7 @@ const About: React.FC<AboutProps> = ({ isDarkMode = true }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-2.5 text-orange-500 font-extrabold uppercase tracking-wider"
               >
-                <User size={14}/> <span className="text-xl md:text-2xl">About Me</span>
+                <User size={18} strokeWidth={2.5}/> <span className="text-xl md:text-2xl">About Me</span>
               </motion.div>
 
               <p className={`text-base md:text-md leading-relaxed font-medium transition-colors duration-500 ${
@@ -152,7 +153,7 @@ const About: React.FC<AboutProps> = ({ isDarkMode = true }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-2.5 text-orange-500 font-extrabold uppercase tracking-wider"
               >
-                <Star size={14}/> <span className="text-xl md:text-2xl">My Journey</span>
+                <Sparkles size={18} strokeWidth={2.5}/> <span className="text-xl md:text-2xl">My Journey</span>
               </motion.div>
 
               <p className={`text-base md:text-md leading-relaxed font-medium italic transition-colors duration-500 ${
@@ -169,7 +170,7 @@ const About: React.FC<AboutProps> = ({ isDarkMode = true }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-2.5 text-orange-500 font-extrabold uppercase tracking-wider"
               >
-                <Code size={14}/> <span className="text-xl md:text-2xl">Beyond Code</span>
+                <Heart size={18} strokeWidth={2.5}/> <span className="text-xl md:text-2xl">Beyond Code</span>
               </motion.div>
 
               <p className={`text-base md:text-md leading-relaxed font-medium italic transition-colors duration-500 ${
