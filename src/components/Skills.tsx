@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Palette, Server, Cloud } from "lucide-react";
 import SkillBar from "./SkillBar";
 
 interface SkillsProps {
@@ -10,7 +11,7 @@ interface SkillsProps {
 const skillCategories = [
   {
     category: "Frontend & UI Engineering",
-    icon: "🎨",
+    icon: Palette,
     accentGradient: "from-orange-500/20 via-amber-500/10 to-transparent",
     skills: [
       { name: "React & Next.js Architecture", level: 88 },
@@ -24,7 +25,7 @@ const skillCategories = [
   },
   {
     category: "Backend Systems & Databases",
-    icon: "⚙️",
+    icon: Server,
     accentGradient: "from-amber-500/20 via-orange-500/10 to-transparent",
     skills: [
       { name: "Node.js Microservices", level: 86 },
@@ -38,7 +39,7 @@ const skillCategories = [
   },
   {
     category: "DevOps & Cloud Orchestration",
-    icon: "☁️",
+    icon: Cloud,
     accentGradient: "from-orange-600/20 via-red-500/10 to-transparent",
     skills: [
       { name: "Docker Containerization", level: 83 },
@@ -68,7 +69,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-const Skills: React.FC<SkillsProps> = ({ isDarkMode = true }) => {
+const Skills: React.FC<SkillsProps> = ({ isDarkMode = false }) => {
   return (
     <section
       id="skills"
@@ -109,72 +110,79 @@ const Skills: React.FC<SkillsProps> = ({ isDarkMode = true }) => {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {skillCategories.map((cat, catIdx) => (
-            <motion.article
-              key={cat.category}
-              tabIndex={0}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -6, scale: 1.015 }}
-              whileTap={{ scale: 0.97 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{
-                duration: 0.5,
-                delay: catIdx * 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className={`group relative flex cursor-pointer select-none flex-col rounded-3xl border p-6 shadow-xl backdrop-blur-xl transition-all duration-300 touch-manipulation overflow-hidden focus:outline-none focus:ring-2 focus:ring-orange-500/50 ${
-                isDarkMode
-                  ? "border-white/10 bg-neutral-900/50 hover:border-orange-500/40 hover:shadow-[0_10px_30px_-10px_rgba(249,115,22,0.25)]"
-                  : "border-slate-200/80 bg-slate-50/70 hover:border-orange-500/40 hover:shadow-[0_10px_30px_-10px_rgba(249,115,22,0.2)] shadow-slate-200/50"
-              }`}
-            >
-              {/* Ambient Hover Gradient Card Overlay */}
-              <div
-                className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${cat.accentGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-              />
-
-              {/* Category Header */}
-              <div
-                className={`relative z-10 mb-5 flex items-center justify-between border-b pb-4 ${
-                  isDarkMode ? "border-white/10" : "border-slate-200"
+          {skillCategories.map((cat, catIdx) => {
+            const IconComponent = cat.icon;
+            return (
+              <motion.article
+                key={cat.category}
+                tabIndex={0}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -6, scale: 1.015 }}
+                whileTap={{ scale: 0.97 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{
+                  duration: 0.5,
+                  delay: catIdx * 0.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className={`group relative flex cursor-pointer select-none flex-col rounded-3xl border p-6 shadow-xl backdrop-blur-xl transition-all duration-300 touch-manipulation overflow-hidden focus:outline-none focus:ring-2 focus:ring-orange-500/50 ${
+                  isDarkMode
+                    ? "border-white/10 bg-neutral-900/50 hover:border-orange-500/40 hover:shadow-[0_10px_30px_-10px_rgba(249,115,22,0.25)]"
+                    : "border-slate-200/80 bg-slate-50/70 hover:border-orange-500/40 hover:shadow-[0_10px_30px_-10px_rgba(249,115,22,0.2)] shadow-slate-200/50"
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <motion.span
-                    whileHover={{ rotate: 15, scale: 1.15 }}
-                    whileTap={{ rotate: -15, scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 350 }}
-                    className="flex h-10 w-10 items-center justify-center rounded-2xl bg-orange-500/10 border border-orange-500/20 text-2xl shadow-inner"
-                  >
-                    {cat.icon}
-                  </motion.span>
-                  <h3 className="text-base font-bold tracking-tight transition-colors duration-300 group-hover:text-orange-400">
-                    {cat.category}
-                  </h3>
-                </div>
-              </div>
+                {/* Ambient Hover Gradient Card Overlay */}
+                <div
+                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${cat.accentGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                />
 
-              {/* Skill Bars List with Mobile Stagger Animation */}
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="relative z-10 flex flex-col gap-1"
-              >
-                {cat.skills.map((skill) => (
-                  <motion.div key={skill.name} variants={itemVariants}>
-                    <SkillBar
-                      name={skill.name}
-                      level={skill.level}
-                      isDarkMode={isDarkMode}
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.article>
-          ))}
+                {/* Category Header */}
+                <div
+                  className={`relative z-10 mb-5 flex items-center justify-between border-b pb-4 ${
+                    isDarkMode ? "border-white/10" : "border-slate-200"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <motion.div
+                      whileHover={{ rotate: 15, scale: 1.15 }}
+                      whileTap={{ rotate: -15, scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 350 }}
+                      className="flex h-10 w-10 items-center justify-center rounded-2xl bg-orange-500/10 border border-orange-500/20 shadow-inner"
+                    >
+                      <IconComponent 
+                        size={20} 
+                        className="text-orange-500" 
+                        strokeWidth={2.5}
+                      />
+                    </motion.div>
+                    <h3 className="text-base font-bold tracking-tight transition-colors duration-300 group-hover:text-orange-400">
+                      {cat.category}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Skill Bars List with Mobile Stagger Animation */}
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="relative z-10 flex flex-col gap-1"
+                >
+                  {cat.skills.map((skill) => (
+                    <motion.div key={skill.name} variants={itemVariants}>
+                      <SkillBar
+                        name={skill.name}
+                        level={skill.level}
+                        isDarkMode={isDarkMode}
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>

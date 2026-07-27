@@ -9,7 +9,7 @@ interface ContactProps {
   isDarkMode?: boolean;
 }
 
-const Contact: React.FC<ContactProps> = ({ isDarkMode = true }) => {
+const Contact: React.FC<ContactProps> = ({ isDarkMode = false }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -57,14 +57,20 @@ const Contact: React.FC<ContactProps> = ({ isDarkMode = true }) => {
   ) => {
     const { name, value } = e.target;
     
-    // Real-time sanitization for message field
     if (name === "message") {
-      const sanitized = sanitizeInput(value);
+      // Only sanitize, don't trim spaces while typing
+      const sanitized = value.replace(/<[^>]*>/g, '')
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .replace(/\//g, '&#x2F;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
       setFormData({ ...formData, [name]: sanitized });
-    } else {
-      // For other fields, just trim and limit length
-      const trimmedValue = value.trimStart().slice(0, 200);
-      setFormData({ ...formData, [name]: trimmedValue });
+    } else if (name === "fullName" || name === "email" || name === "phone") {
+      // For other fields, limit length but allow spaces
+      const cleanValue = value.slice(0, 200);
+      setFormData({ ...formData, [name]: cleanValue });
     }
   };
 

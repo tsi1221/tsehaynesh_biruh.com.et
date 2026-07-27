@@ -22,7 +22,7 @@ import Certificates from "./Section/Certificates";
 import Contact from "./components/Contact";
 
 const LoadingScreen = () => (
-  <div className="flex h-screen w-full items-center justify-center bg-[#080808]">
+  <div className="flex h-screen w-full items-center justify-center bg-white">
     <motion.div
       animate={{ rotate: 360 }}
       transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
@@ -32,7 +32,7 @@ const LoadingScreen = () => (
 );
 
 export default function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Initialize GitHub profile data integration
   useGithub("tsi1221");
@@ -107,30 +107,11 @@ export default function App() {
               </div>
 
               <div className="order-2 flex flex-col items-center text-center lg:order-1 lg:col-span-7 lg:items-start lg:text-left">
-                <motion.div
-                  initial={{ opacity: 0, y: -15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  className={`mt-10 inline-flex select-none items-center justify-center rounded-full border px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] shadow-sm backdrop-blur-sm sm:mt-14 sm:px-4 sm:text-[10px] sm:tracking-[0.25em] lg:mt-20 ${
-                    isDarkMode
-                      ? "border-emerald-500/20 bg-emerald-500/5 text-emerald-400"
-                      : "border-emerald-500/20 bg-emerald-500/5 text-emerald-600"
-                  }`}
-                >
-                  <span className="flex items-center gap-1.5">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    </span>
-                    Available for New Opportunities
-                  </span>
-                </motion.div>
-
                 <motion.h1
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
-                  className={`mt-4 mb-2 text-2xl font-black tracking-tight leading-tight drop-shadow-sm xs:text-4xl sm:text-4xl sm:leading-none md:text-6xl lg:text-7xl ${
+                  className={`mt-20 mb-2 text-2xl font-black tracking-tight leading-tight drop-shadow-sm xs:text-4xl sm:text-4xl sm:leading-none md:text-6xl lg:text-7xl ${
                     isDarkMode ? "text-white" : "text-slate-950"
                   }`}
                 >
@@ -175,14 +156,14 @@ export default function App() {
                 <div className="grid w-full grid-cols-1 gap-3.5 sm:flex sm:w-auto sm:items-center sm:gap-4">
                   <motion.a
                     href="#projects"
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    className="group relative flex h-[48px] w-full min-w-[180px] select-none items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 px-8 text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-orange-500/15 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/25 sm:w-auto"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="group relative flex h-[48px] w-full min-w-[180px] select-none items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 px-8 text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-orange-500/25 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/40 sm:w-auto"
                   >
-                    <span className="absolute inset-0 h-full w-full -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-shine" />
-                    <span className="relative z-10">View My Work</span>
+                    <span className="absolute inset-0 h-full w-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-shine" />
+                    <span className="relative z-10 group-hover:scale-105 transition-transform duration-300">View My Work</span>
                     <svg
-                      className="h-3.5 w-3.5 stroke-[3.5] transition-transform duration-300 group-hover:translate-x-1"
+                      className="h-3.5 w-3.5 stroke-[3.5] transition-all duration-300 group-hover:translate-x-1.5 group-hover:scale-110"
                       fill="none"
                       viewBox="0 0 24 24"
                     >
@@ -230,5 +211,5 @@ export default function App() {
         <Footer isDarkMode={isDarkMode} />
       </div>
     </Suspense>
-  );
+  );  
 }

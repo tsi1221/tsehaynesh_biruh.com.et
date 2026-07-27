@@ -4,7 +4,11 @@ import { Download, CheckCircle2, Loader2 } from "lucide-react";
 
 type Status = "idle" | "loading" | "success";
 
-const CVButton = () => {
+interface CVButtonProps {
+  isDarkMode?: boolean;
+}
+
+const CVButton: React.FC<CVButtonProps> = ({ isDarkMode = false }) => {
   const [status, setStatus] = useState<Status>("idle");
 
   const handleDownload = async () => {
@@ -33,10 +37,14 @@ const CVButton = () => {
   return (
     <motion.button
       onClick={handleDownload}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       disabled={status !== "idle"}
-      className="group relative flex w-full xs:w-auto items-center justify-center gap-3.5 rounded-xl border-1 border-white bg-black/20 px-6 py-3.5 text-xs font-black uppercase tracking-widest text-white shadow-md backdrop-blur-md transition-all duration-300 hover:bg-white/10 disabled:cursor-not-allowed sm:px-8 sm:py-3.5 dark:border-white dark:bg-black/40 dark:hover:bg-white/10"
+      className={`group relative flex w-full xs:w-auto items-center justify-center gap-3.5 rounded-xl border-2 px-6 py-3.5 text-xs font-black uppercase tracking-widest shadow-lg backdrop-blur-md transition-all duration-300 disabled:cursor-not-allowed sm:px-8 sm:py-3.5 ${
+        isDarkMode
+          ? "border-white bg-white text-black hover:bg-gray-100 hover:shadow-white/30 hover:shadow-2xl"
+          : "border-black bg-black text-white hover:bg-gray-900 hover:shadow-black/30 hover:shadow-2xl"
+      }`}
     >
       <AnimatePresence mode="wait">
         {status === "idle" && (
@@ -48,7 +56,7 @@ const CVButton = () => {
             className="flex items-center gap-2"
           >
             <span>Download CV</span>
-            <Download size={14} className="stroke-[3]" />
+            <Download size={14} className="stroke-[3] group-hover:translate-y-0.5 group-hover:scale-110 transition-all duration-300" />
           </motion.div>
         )}
 
@@ -58,7 +66,7 @@ const CVButton = () => {
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
-            className="flex items-center gap-2 text-orange-400"
+            className={`flex items-center gap-2 ${isDarkMode ? "text-orange-600" : "text-orange-400"}`}
           >
             <span>Preparing</span>
             <Loader2 size={14} className="animate-spin stroke-[3]" />
@@ -71,7 +79,7 @@ const CVButton = () => {
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
-            className="flex items-center gap-2 text-green-400"
+            className={`flex items-center gap-2 ${isDarkMode ? "text-green-600" : "text-green-400"}`}
           >
             <span>Downloaded</span>
             <CheckCircle2 size={14} className="stroke-[3]" />

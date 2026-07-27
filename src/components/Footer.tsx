@@ -7,7 +7,6 @@ import {
   ArrowUp, 
   MapPin,
   Phone,
-  Clock,
   Instagram
 } from 'lucide-react';
 
@@ -15,7 +14,7 @@ interface FooterProps {
   isDarkMode?: boolean;
 }
 
-const Footer: React.FC<FooterProps> = ({ isDarkMode = true }) => {
+const Footer: React.FC<FooterProps> = ({ isDarkMode = false }) => {
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
@@ -214,28 +213,19 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode = true }) => {
           ))}
         </div>
 
-        {/* Bottom Bar */}
-        <div className={`pt-10 border-t flex flex-col md:flex-row justify-between items-center gap-6 transition-colors duration-500 ${
+        {/* Bottom Bar - Centered */}
+        <div className={`pt-10 border-t transition-colors duration-500 ${
           isDarkMode ? "border-white/5" : "border-slate-200"
         }`}>
-          <p className={`text-[10px] font-black tracking-[0.3em] uppercase transition-colors duration-500 ${
+          <p className={`text-center text-[10px] font-black tracking-[0.3em] uppercase transition-colors duration-500 ${
             isDarkMode ? "text-gray-600" : "text-slate-400"
           }`}>
             © {currentYear} Tsehaynesh Biruh. All rights reserved.
           </p>
-          <div className={`flex items-center gap-3 px-4 py-2 rounded-full border transition-colors duration-500 ${
-            isDarkMode 
-              ? "bg-green-500/5 border-green-500/10" 
-              : "bg-green-50 border-green-200"
-          }`}>
-            <Clock size={14} className="text-green-500" />
-            <span className="text-[10px] font-black text-green-500 uppercase tracking-[0.2em]">Available Any Time</span>
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
-          </div>
         </div>
       </div>
     </footer>
   );
-};
+};  
 
 export default Footer;

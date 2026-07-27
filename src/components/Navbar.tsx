@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, Code2 } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 
 interface NavbarProps {
   isDarkMode?: boolean;
   toggleTheme?: () => void;
 }
 
-// Static array defined outside to prevent useEffect re-renders and ESLint warnings
 const NAV_LINKS = [
   { name: "Home", id: "home" },
   { name: "About", id: "about" },
@@ -18,7 +17,7 @@ const NAV_LINKS = [
   { name: "Contact", id: "contact" },
 ];
 
-const Navbar: React.FC<NavbarProps> = ({ isDarkMode = true, toggleTheme }) => {
+const Navbar: React.FC<NavbarProps> = ({ isDarkMode = false, toggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -67,45 +66,33 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode = true, toggleTheme }) => {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 md:px-10">
-        {/* Brand & Animated Code Icon */}
+        {/* Brand */}
         <motion.div
           onClick={() => scrollToSection("home")}
           whileTap={{ scale: 0.95 }}
           className="flex cursor-pointer items-center gap-2.5 select-none group"
         >
-          {/* Animated Floating Code Badge */}
-          <motion.div
-            animate={{ y: [0, -4, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            whileHover={{ rotate: 180, scale: 1.1 }}
-            className={`relative flex h-10 w-10 items-center justify-center rounded-2xl border transition-all duration-500 ${
-              isDarkMode
-                ? "border-orange-500/40 bg-gradient-to-br from-orange-500/20 via-neutral-900 to-amber-500/20 text-orange-400 shadow-[0_0_15px_rgba(249,115,22,0.25)] group-hover:border-orange-400 group-hover:shadow-[0_0_25px_rgba(249,115,22,0.45)]"
-                : "border-orange-500/30 bg-gradient-to-br from-orange-100 via-white to-amber-100 text-orange-600 shadow-sm group-hover:border-orange-500 group-hover:shadow-md"
-            }`}
-          >
-            <Code2 size={20} className="stroke-[2.5]" />
-            <span className="absolute inset-0 rounded-2xl bg-orange-500/10 blur-sm animate-pulse" />
-          </motion.div>
-
-          {/* Brand Name */}
           <div className="flex flex-col">
             <span
               className={`text-base font-extrabold tracking-tight leading-none transition-colors ${
-                isDarkMode ? "text-white group-hover:text-orange-400" : "text-slate-900 group-hover:text-orange-600"
+                isDarkMode 
+                  ? "text-white group-hover:text-orange-400" 
+                  : "text-slate-900 group-hover:text-orange-600"
               }`}
             >
               Tsehaynesh
             </span>
-            <span className={`text-[10px] font-semibold uppercase tracking-wider mt-0.5 ${
-              isDarkMode ? "text-white/80" : "text-neutral-500"
-            }`}>
+            <span 
+              className={`text-[10px] font-semibold uppercase tracking-wider mt-0.5 ${
+                isDarkMode ? "text-white/80" : "text-neutral-500"
+              }`}
+            >
               Biruh
             </span>
           </div>
         </motion.div>
 
-        {/* Grouped Nav Buttons */}
+        {/* Desktop Navigation */}
         <nav
           className="hidden items-center md:flex"
           onMouseLeave={() => setHoveredSection(null)}
@@ -129,7 +116,6 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode = true, toggleTheme }) => {
                     : "text-slate-700"
                 }`}
               >
-                {/* Sliding Highlight Pill */}
                 {(isHovered || (!hoveredSection && isActive)) && (
                   <motion.div
                     layoutId="groupedButtonHighlight"
@@ -149,7 +135,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode = true, toggleTheme }) => {
 
         {/* Right Action Controls */}
         <div className="flex items-center gap-3">
-          {/* Theme Switcher */}
+          {/* Theme Toggle */}
           <motion.button
             onClick={toggleTheme}
             whileHover={{ scale: 1.05 }}
@@ -176,7 +162,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode = true, toggleTheme }) => {
             </motion.div>
           </motion.button>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="cursor-pointer p-1 text-orange-500 md:hidden"
@@ -187,7 +173,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode = true, toggleTheme }) => {
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
@@ -248,7 +234,9 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode = true, toggleTheme }) => {
               </div>
 
               <div className="mt-auto border-t border-orange-500/10 pt-4">
-                <p className="text-[10px] font-semibold text-white/70 uppercase tracking-widest">
+                <p className={`text-[10px] font-semibold uppercase tracking-widest ${
+                  isDarkMode ? "text-white/70" : "text-slate-600"
+                }`}>
                   📍 Addis Ababa, Ethiopia
                 </p>
               </div>
