@@ -21,7 +21,7 @@ const CVButton: React.FC<CVButtonProps> = ({ isDarkMode = false }) => {
 
     const link = document.createElement("a");
     link.href = "/TsehayneshBiruh.pdf";
-    link.download = "Tsehaynesh_Biruh_Resumee.pdf";
+    link.download = "Tsehaynesh_Biruh_Resume.pdf";
 
     document.body.appendChild(link);
     link.click();

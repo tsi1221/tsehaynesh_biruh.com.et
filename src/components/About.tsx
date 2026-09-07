@@ -30,7 +30,7 @@ const About: React.FC<AboutProps> = ({ isDarkMode = false }) => {
     setCvStatus('loading');
 
     setTimeout(() => {
-      const fileUrl = '/Tsi_CV.pdf';
+      const fileUrl = '/TsehayneshBiruh.pdf';
       const link = document.createElement('a');
       link.href = fileUrl;
       link.download = 'Tsehaynesh_Biruh_CV.pdf';
